@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
+import android.os.ParcelFileDescriptor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -89,7 +90,8 @@ class Engine {
         OutputStream fos;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ContentResolver resolver = context.getContentResolver();
-            fos = resolver.openOutputStream(Uri.fromFile(tagImg), "w");
+            ParcelFileDescriptor pfd = resolver.openFileDescriptor(Uri.fromFile(tagImg), "w");
+            fos = new FileOutputStream(pfd.getFileDescriptor());
         } else {
             fos = new FileOutputStream(tagImg);
         }
