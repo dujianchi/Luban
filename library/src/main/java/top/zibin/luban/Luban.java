@@ -20,7 +20,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class Luban implements Handler.Callback {
     private static final String TAG = "Luban";
-    private static final String DEFAULT_DISK_CACHE_DIR = "luban_disk_cache";
+    //private static final String DEFAULT_DISK_CACHE_DIR = "luban_disk_cache";
 
     private static final int MSG_COMPRESS_SUCCESS = 0;
     private static final int MSG_COMPRESS_START = 1;
@@ -86,31 +86,7 @@ public class Luban implements Handler.Callback {
      * @see #getImageCacheDir(Context, String)
      */
     private File getImageCacheDir(Context context) {
-        return getImageCacheDir(context, DEFAULT_DISK_CACHE_DIR);
-    }
-
-    /**
-     * Returns a directory with the given name in the private cache directory of the application to
-     * use to store retrieved media and thumbnails.
-     *
-     * @param context   A context.
-     * @param cacheName The name of the subdirectory in which to store the cache.
-     * @see #getImageCacheDir(Context)
-     */
-    private static File getImageCacheDir(Context context, String cacheName) {
-        File cacheDir = context.getExternalCacheDir();
-        if (cacheDir != null) {
-            File result = new File(cacheDir, cacheName);
-            if (!result.mkdirs() && (!result.exists() || !result.isDirectory())) {
-                // File wasn't able to create a directory, or the result exists but not a directory
-                return null;
-            }
-            return result;
-        }
-        if (Log.isLoggable(TAG, Log.ERROR)) {
-            Log.e(TAG, "default disk cache dir is null");
-        }
-        return null;
+        return context.getExternalCacheDir();
     }
 
     /**
