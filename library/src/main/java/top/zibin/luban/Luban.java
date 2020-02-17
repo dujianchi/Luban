@@ -83,7 +83,6 @@ public class Luban implements Handler.Callback {
      * use to store retrieved audio.
      *
      * @param context A context.
-     * @see #getImageCacheDir(Context, String)
      */
     private File getImageCacheDir(Context context) {
         return context.getExternalCacheDir();
@@ -170,9 +169,24 @@ public class Luban implements Handler.Callback {
                 result = new File(path.getPath());
             }
         } else {
-            result = Checker.SINGLE.needCompress(mLeastCompressSize, path.getPath()) ?
-                    new Engine(context, path, outFile, focusAlpha).compress() :
-                    new File(path.getPath());
+            Checker single = Checker.SINGLE;
+            String pathPath = path.getPath();
+            Engine engine = new Engine(context, path, outFile, focusAlpha);
+            File compress = engine.compress();
+            File file = new File(path.getPath());
+            System.out.println("single-----------" + single);
+            System.out.println("path-----------" + path);
+            System.out.println("pathPath-----------" + pathPath);
+            System.out.println("context-----------" + context);
+            System.out.println("outFile-----------" + outFile);
+            System.out.println("focusAlpha-----------" + focusAlpha);
+            System.out.println("engine-----------" + engine);
+            System.out.println("compress-----------" + compress);
+            System.out.println("file-----------" + file);
+            result = single.needCompress(mLeastCompressSize, pathPath) ?
+                    compress :
+                    file;
+            System.out.println("result-----------" + result);
         }
 
         return result;
