@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -174,19 +175,19 @@ public class Luban implements Handler.Callback {
             Engine engine = new Engine(context, path, outFile, focusAlpha);
             File compress = engine.compress();
             File file = new File(path.getPath());
-            System.out.println("single-----------" + single);
-            System.out.println("path-----------" + path);
-            System.out.println("pathPath-----------" + pathPath);
-            System.out.println("context-----------" + context);
-            System.out.println("outFile-----------" + outFile);
-            System.out.println("focusAlpha-----------" + focusAlpha);
-            System.out.println("engine-----------" + engine);
-            System.out.println("compress-----------" + compress);
-            System.out.println("file-----------" + file);
+            Log.d("---------------------", "single-----------" + single);
+            Log.d("---------------------", "path-----------" + path);
+            Log.d("---------------------", "pathPath-----------" + pathPath);
+            Log.d("---------------------", "context-----------" + context);
+            Log.d("---------------------", "outFile-----------" + outFile);
+            Log.d("---------------------", "focusAlpha-----------" + focusAlpha);
+            Log.d("---------------------", "engine-----------" + engine);
+            Log.d("---------------------", "compress-----------" + compress);
+            Log.d("---------------------", "file-----------" + file);
             result = single.needCompress(mLeastCompressSize, pathPath) ?
                     compress :
                     file;
-            System.out.println("result-----------" + result);
+            Log.d("---------------------", "result-----------" + result);
         }
 
         return result;
