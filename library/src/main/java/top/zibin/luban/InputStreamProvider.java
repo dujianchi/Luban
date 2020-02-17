@@ -1,5 +1,8 @@
 package top.zibin.luban;
 
+import android.net.Uri;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -10,9 +13,11 @@ import java.io.InputStream;
  */
 public interface InputStreamProvider {
 
-  InputStream open() throws IOException;
+    InputStream open() throws IOException;
 
-  void close();
+    void close();
 
-  String getPath();
+    String getPath();
+
+    Uri outputUri(File outFile);
 }

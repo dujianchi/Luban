@@ -1,5 +1,8 @@
 package top.zibin.luban;
 
+import android.net.Uri;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -9,26 +12,31 @@ import java.io.InputStream;
  */
 public abstract class InputStreamAdapter implements InputStreamProvider {
 
-  private InputStream inputStream;
+    private InputStream inputStream;
 
-  @Override
-  public InputStream open() throws IOException {
-    close();
-    inputStream = openInternal();
-    return inputStream;
-  }
-
-  public abstract InputStream openInternal() throws IOException;
-
-  @Override
-  public void close() {
-    if (inputStream != null) {
-      try {
-        inputStream.close();
-      } catch (IOException ignore) {
-      }finally {
-        inputStream = null;
-      }
+    @Override
+    public InputStream open() throws IOException {
+        close();
+        inputStream = openInternal();
+        return inputStream;
     }
-  }
+
+    public abstract InputStream openInternal() throws IOException;
+
+    @Override
+    public void close() {
+        if (inputStream != null) {
+            try {
+                inputStream.close();
+            } catch (IOException ignore) {
+            } finally {
+                inputStream = null;
+            }
+        }
+    }
+
+    @Override
+    public Uri outputUri(File outFile) {
+        return Uri.fromFile(outFile);
+    }
 }

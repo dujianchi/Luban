@@ -90,7 +90,8 @@ class Engine {
         OutputStream fos;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ContentResolver resolver = context.getContentResolver();
-            ParcelFileDescriptor pfd = resolver.openFileDescriptor(Uri.fromFile(tagImg), "w");
+            Uri uri = srcImg.outputUri(tagImg);
+            ParcelFileDescriptor pfd = resolver.openFileDescriptor(uri, "w");
             fos = new FileOutputStream(pfd.getFileDescriptor());
         } else {
             fos = new FileOutputStream(tagImg);

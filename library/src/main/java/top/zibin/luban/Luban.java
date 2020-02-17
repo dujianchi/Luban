@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +25,7 @@ public class Luban implements Handler.Callback {
     private static final int MSG_COMPRESS_START = 1;
     private static final int MSG_COMPRESS_ERROR = 2;
 
-    private String mTargetDir;
+    private String mTargetDir, mProvider;
     private boolean focusAlpha;
     private int mLeastCompressSize;
     private OnRenameListener mRenameListener;
@@ -38,6 +37,7 @@ public class Luban implements Handler.Callback {
 
     private Luban(Builder builder) {
         this.mTargetDir = builder.mTargetDir;
+        this.mProvider = builder.mProvider;
         this.mRenameListener = builder.mRenameListener;
         this.mStreamProviders = builder.mStreamProviders;
         this.mCompressListener = builder.mCompressListener;
@@ -199,6 +199,7 @@ public class Luban implements Handler.Callback {
     public static class Builder {
         private Context context;
         private String mTargetDir;
+        private String mProvider;
         private boolean focusAlpha;
         private int mLeastCompressSize = 100;
         private OnRenameListener mRenameListener;
@@ -296,6 +297,11 @@ public class Luban implements Handler.Callback {
 
         public Builder setTargetDir(String targetDir) {
             this.mTargetDir = targetDir;
+            return this;
+        }
+
+        public Builder setProvider(String provider) {
+            this.mProvider = provider;
             return this;
         }
 
