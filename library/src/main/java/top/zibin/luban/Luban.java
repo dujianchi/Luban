@@ -171,18 +171,18 @@ public class Luban implements Handler.Callback {
             }
         } else {
             Checker single = Checker.SINGLE;
-            String pathPath = path.getPath();
-            Engine engine = new Engine(context, path, outFile, focusAlpha);
-            File compress = engine.compress();
-            File file = new File(path.getPath());
             Log.d("---------------------", "single-----------" + single);
             Log.d("---------------------", "path-----------" + path);
+            String pathPath = path.getPath();
             Log.d("---------------------", "pathPath-----------" + pathPath);
             Log.d("---------------------", "context-----------" + context);
             Log.d("---------------------", "outFile-----------" + outFile);
             Log.d("---------------------", "focusAlpha-----------" + focusAlpha);
+            Engine engine = new Engine(context, path, outFile, focusAlpha);
             Log.d("---------------------", "engine-----------" + engine);
+            File compress = engine.compress();
             Log.d("---------------------", "compress-----------" + compress);
+            File file = new File(path.getPath());
             Log.d("---------------------", "file-----------" + file);
             result = single.needCompress(mLeastCompressSize, pathPath) ?
                     compress :
